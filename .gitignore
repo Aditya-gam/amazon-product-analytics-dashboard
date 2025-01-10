@@ -15,6 +15,8 @@ __pycache__/
 venv/
 ENV/
 env/
+.env
+~/.aws/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
@@ -26,20 +28,12 @@ dist/
 build/
 *.egg-info
 
-# ==============================
-# AWS-Specific Ignored Files
-# ==============================
-
 # AWS credentials and configuration
-creds/.aws/credentials  # AWS CLI credentials file
+~/.aws/credentials  # AWS CLI credentials file
 ~/.aws/config       # AWS CLI configuration file
-~/.aws/         # AWS CLI credentials directory
+~/.aws/          # AWS CLI credentials directory
 *.aws/          # AWS CLI credentials directory
 .env            # Environment file for storing sensitive credentials
-
-# ==============================
-# Data-Related Ignored Files
-# ==============================
 
 # Raw and processed data files
 data/raw/
@@ -51,10 +45,6 @@ data/processed/
 *.temp
 *.tmp
 *.log           # Log files
-
-# ==============================
-# IDE & Editor-Specific Ignored Files
-# ==============================
 
 # VSCode settings
 .vscode/
@@ -69,10 +59,6 @@ data/processed/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-
-# ==============================
-# Miscellaneous Ignored Files
-# ==============================
 
 # Logs and debug output
 *.log
@@ -100,17 +86,11 @@ htmlcov/
 *.twb
 *.twbx
 
-# ==============================
 # Node.js (if used for any scripts)
-# ==============================
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# ==============================
-# Security and Backup
-# ==============================
 
 # Private keys and certificates
 *.pem
