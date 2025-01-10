@@ -21,8 +21,8 @@ from dotenv import load_dotenv
 # Load .env file
 load_dotenv()
 
-aws_access_key_id = os.getenv('aws_access_key_id')
-aws_secret_access_key = os.getenv('aws_secret_access_key')
+aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 
 # Use the credentials in the boto3 client
 s3_client_conf = boto3.client(
