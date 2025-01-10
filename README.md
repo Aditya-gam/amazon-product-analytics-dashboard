@@ -1,5 +1,6 @@
 # amazon-product-analytics-dashboard
 
+```
 amazon-product-analytics-dashboard/
 │
 ├── data/                 # Raw and processed data
@@ -17,3 +18,4 @@ amazon-product-analytics-dashboard/
 ├── README.md             # Project documentation
 │
 └── requirements.txt      # Python dependencies
+```
