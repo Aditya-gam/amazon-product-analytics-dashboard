@@ -156,7 +156,7 @@ AWS_ACCESS_KEY_ID=your_access_key_id
 AWS_SECRET_ACCESS_KEY=your_secret_access_key
 
 # AWS Redshift credentials
-REDSHIFT_HOST=analytics-cluster.cblhjtrhob5d.us-east-1.redshift.amazonaws.com
+REDSHIFT_HOST=your_redshift_host
 REDSHIFT_PORT=5439
 REDSHIFT_DBNAME=dev
 REDSHIFT_USER=your_redshift_username
