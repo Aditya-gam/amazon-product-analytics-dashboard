@@ -1,6 +1,7 @@
 # clean_data.py
 
 # Script for Cleaning Amazon Product Dataset
+# Usage: python clean_data.py <file_path>
 
 import pandas as pd
 import numpy as np
@@ -20,20 +21,45 @@ def validate_input_file(file_path):
 
 
 def handle_ratings(row):
-    try:
-        row['ratings'] = float(row['ratings']) if not pd.isnull(
-            row['ratings']) else 0.0
-    except (ValueError, TypeError):
+    # Case 1: Both columns have missing values
+    if pd.isnull(row['ratings']) and pd.isnull(row['no_of_ratings']):
         row['ratings'] = 0.0
-
-    try:
-        row['no_of_ratings'] = int(row['no_of_ratings'].replace(
-            ',', '')) if not pd.isnull(row['no_of_ratings']) else 0
-    except (ValueError, TypeError, AttributeError):
         row['no_of_ratings'] = 0
 
-    if pd.isnull(row['ratings']) or pd.isnull(row['no_of_ratings']):
+    # Case 2: 'ratings' is missing but 'no_of_ratings' has a value
+    elif pd.isnull(row['ratings']) and not pd.isnull(row['no_of_ratings']):
+        try:
+            row['no_of_ratings'] = int(row['no_of_ratings'].replace(',', '')) if isinstance(
+                row['no_of_ratings'], str) else int(row['no_of_ratings'])
+        except (ValueError, TypeError):
+            row['no_of_ratings'] = 0
         row['ratings'] = 0.0
+
+    # Case 3: 'ratings' has a value but 'no_of_ratings' is missing
+    elif not pd.isnull(row['ratings']) and pd.isnull(row['no_of_ratings']):
+        try:
+            row['ratings'] = float(row['ratings'])
+        except (ValueError, TypeError):
+            row['ratings'] = 0.0
+        row['no_of_ratings'] = 0
+
+    # Case 4: Both columns have values
+    else:
+        try:
+            row['ratings'] = float(row['ratings'])
+        except (ValueError, TypeError):
+            row['ratings'] = 0.0
+
+        try:
+            row['no_of_ratings'] = int(row['no_of_ratings'].replace(',', '')) if isinstance(
+                row['no_of_ratings'], str) else int(row['no_of_ratings'])
+        except (ValueError, TypeError):
+            row['no_of_ratings'] = 0
+
+    # Ensure correct data types for both columns
+    if not isinstance(row['ratings'], float):
+        row['ratings'] = 0.0
+    if not isinstance(row['no_of_ratings'], int):
         row['no_of_ratings'] = 0
 
     return row
@@ -87,8 +113,10 @@ def classify_rating(rating):
         return 'Highly Rated'
     elif rating >= 2.5:
         return 'Moderately Rated'
-    else:
+    elif rating < 2.5:
         return 'Low Rated'
+    else:  # Handle missing values
+        return 'Unrated'
 
 # Function to clean and process the dataset
 
